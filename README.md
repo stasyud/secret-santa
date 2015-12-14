@@ -1,7 +1,7 @@
 # secret-santa
 
 Internal project intended to generate list of assigned users for input list of users.
-Written on groovy + spark.
+Written on [groovy](http://www.groovy-lang.org/index.html) + [spark](http://sparkjava.com/).
 
 To run project execute following commands from the root of the project:
 ```
