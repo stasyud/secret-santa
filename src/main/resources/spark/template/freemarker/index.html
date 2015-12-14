@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--Author: SYudenkov s1@lvivsoft.com-->
+    <meta charset="UTF-8">
+    <title>Secret Santa</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+          integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+          crossorigin="anonymous">
+</head>
+<body>
+<!-- Begin page content -->
+<div class="container">
+    <div class="page-header">
+        <h1>Secret Santa</h1>
+    </div>
+
+    <div class="well">
+        <h4>Requirements:</h4>
+
+        <p>List of recipients should consist either list of email addresses (one per row) or list of recipients in the
+            following format:
+            <b>Email address,Username</b></p>
+
+        <p><b>Examples:</b></p>
+
+        <p>john1@doe.com</p>
+
+        <p>john2@doe.com</p>
+
+        <p>john3@doe.com</p>
+
+        <p>john4@doe.com</p>
+
+        <p>or</p>
+
+        <p>john1@doe.com,John Doe1</p>
+
+        <p>john2@doe.com,John Doe2</p>
+
+        <p>john3@doe.com,John Doe3</p>
+
+        <p>john4@doe.com,John Doe4</p>
+        <br/>
+
+        <b>Notes:</b>
+        <p class="text-warning">System doesn't check whether provided email addresses are valid</p>
+
+        <p class="text-warning">Quantity of users should be even number, otherwise system will drop the
+            last user from the list</p>
+    </div>
+    <form action="/process" method="post">
+        <div class="row">
+            <div class="col-md-12">
+        <textarea class="form-control" id="recipients" name="recipients"
+                  placeholder="Paste here list of the participants">${container.recipients}</textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <label for="showResultsEnabled">
+                    <input name="showResultsEnabled" id="showResultsEnabled" type="checkbox"
+                    <#if container.showResultsEnabled?? && container.showResultsEnabled?string=="true">checked="true"
+                    </#if>
+                    >
+                    Show results (will show you all the result pairs of participants)
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <a class="btn btn-info" href="/settings" role="button">Mail settings</a>
+            </div>
+            <div class="col-md-6">
+                <p class="text-danger">Please configure mail settings before starting processing</p>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Start processing</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+<script src="https://code.jquery.com/jquery-2.0.2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.0/notify.js"></script>
+
+<script type="application/javascript">
+    function showTopMessage(message, type) {
+        $.notify(message, {className: type, autoHide: true, autoHideDelay: 20000, position: 't c'});
+    }
+</script>
+<#if error??>
+    <script type="application/javascript">
+        showTopMessage("${error}", 'error');
+    </script>
+</#if>
+
+</body>
+</html>

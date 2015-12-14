@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--Author: SYudenkov s1@lvivsoft.com-->
+    <meta charset="UTF-8">
+    <title>Secret Santa</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+          integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+          crossorigin="anonymous">
+</head>
+<body>
+<!-- Begin page content -->
+<div class="container">
+    <div class="row">
+        <a href="/" class="btn btn-info" style="margin-top: 10px;">Back to the main page</a>
+    </div>
+    <div class="page-header">
+        <h1>Processing page</h1>
+    </div>
+
+    <div class="well">
+        <h4>Result:</h4>
+
+        <#list results as user>
+          <p>${user}
+        </#list>
+    </div>
+
+    <form action="/notify" method="post">
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Notify recipients!</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+<script src="https://code.jquery.com/jquery-2.0.2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.0/notify.js"></script>
+
+<script type="application/javascript">
+    function showTopMessage(message, type) {
+        $.notify(message, {className: type, autoHide: true, autoHideDelay: 20000, position: 't c'});
+    }
+</script>
+<#if error??>
+    <script type="application/javascript">
+        showTopMessage("${error}", 'error');
+    </script>
+</#if>
+
+<#if success??>
+    <script type="application/javascript">
+        showTopMessage('Settings were successfully updated', 'success');
+    </script>
+</#if>
+</body>
+</html>

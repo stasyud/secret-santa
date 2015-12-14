@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notification settings</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+          integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <a href="/" class="btn btn-info" style="margin-top: 10px;">Back to the main page</a>
+    </div>
+    <div class="page-header">
+        <h1>Email settings</h1>
+    </div>
+    <div class="row">
+        <form class="form-horizontal" action="/settings/mail" method="post">
+            <div class="form-group">
+                <label for="fromEmailAddress" class="col-sm-2 control-label">Email address</label>
+
+                <div class="col-sm-5">
+                    <input type="email" class="form-control" id="fromEmailAddress" name="fromEmailAddress"
+                           value="${container.fromEmailAddress}"
+                           placeholder="Email address">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fromName" class="col-sm-2 control-label">Name of sender</label>
+
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="fromName" name="fromName"
+                           value="${container.fromName}" placeholder="From name">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="subject" class="col-sm-2 control-label">Mail subject</label>
+
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="subject" name="subject"
+                           value="${container.subject}" placeholder="Mail subject">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="smtpLogin" class="col-sm-2 control-label">Login</label>
+
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="smtpLogin" name="smtpLogin"
+                           value="${container.smtpLogin}" placeholder="Login">
+
+                    <p class="help-block">Use your email address</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="smtpPassword" class="col-sm-2 control-label">Password</label>
+
+                <div class="col-sm-5">
+                    <input type="password" class="form-control" id="smtpPassword" name="smtpPassword"
+                           value="${container.smtpPassword}"
+                           placeholder="Password">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="smtpHost" class="col-sm-2 control-label">SMTP Host</label>
+
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="smtpHost" name="smtpHost"
+                           value="${container.smtpHost}" placeholder="SMTP Host">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="smtpPort" class="col-sm-2 control-label">SMTP port</label>
+
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="smtpPort" name="smtpPort"
+                           value="${container.smtpPort}" placeholder="SMTP port">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="smtpStartTLSEnabled" class="col-sm-2 control-label">Start TLS</label>
+
+                <div class="col-sm-5">
+                    <input type="checkbox" id="smtpStartTLSEnabled" name="smtpStartTLSEnabled"
+                    <#if container.smtpStartTLSEnabled?? && container.smtpStartTLSEnabled?string=="true">
+                        checked="true"
+                    </#if>
+                    >
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="smtpAuthEnabled" class="col-sm-2 control-label">SMTP Auth</label>
+
+                <div class="col-sm-5">
+                    <input type="checkbox" id="smtpAuthEnabled" name="smtpAuthEnabled"
+                    <#if container.smtpAuthEnabled?? && container.smtpAuthEnabled?string=="true">checked="true"</#if>
+                    >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <blockquote>
+                        <small>To make sure everything works as expected you can send test email by filling in your
+                            email address and checking checkbox in the section below.
+                        </small>
+                        <p class="text-warning">If you are going to use google account for sending notifications, you
+                            should enable less secure app access in your Gmail settings:
+                            <a href="https://support.google.com/accounts/answer/6010255">link</a></p>
+                    </blockquote>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="page-header">
+        <h1>Template settings</h1>
+    </div>
+    <div class="row">
+        <form class="form-horizontal" action="/settings/template" method="post">
+            <div class="form-group">
+                <label for="template" class="col-sm-2 control-label">Template</label>
+
+                <div class="col-sm-8">
+                    <textarea class="form-control" id="template" name="template"
+                              placeholder="Paste here template of the mail">${template}</textarea>
+
+                    <p class="help-block">System allows to use following variable names (they are not required) in the
+                        template:</p>
+
+                    <p class="help-block"><b>USEREMAIL</b>: - recipient's email address</p>
+
+                    <p class="help-block"><b>USERNAME</b>: - recipient's name</p>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="testEmail" class="col-sm-2 control-label">Your email address</label>
+
+                <div class="col-sm-5">
+                    <input type="email" class="form-control" id="testEmail" name="testEmail">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="testMailEnabled" class="col-sm-2 control-label">Send test mail after saving</label>
+
+                <div class="col-sm-5">
+                    <input type="checkbox" id="testMailEnabled" name="testMailEnabled">
+
+                    <p class="help-block">You can check whether template is correct, by entering your address and
+                        activating given checkbox</p>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <blockquote>
+                <small>Please note, that new notification settings are only valid during current run of the
+                    application. They will be overridden with the defaults after reloading application.
+                </small>
+            </blockquote>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-2.0.2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.0/notify.js"></script>
+
+<script type="application/javascript">
+    function showTopMessage(message, type) {
+        $.notify(message, {className: type, autoHide: true, autoHideDelay: 20000, position: 't c'});
+    }
+</script>
+
+<#if error??>
+    <script type="application/javascript">
+        showTopMessage("${error}", 'error');
+    </script>
+</#if>
+
+<#if success??>
+    <script type="application/javascript">
+        showTopMessage('Settings were successfully updated', 'success');
+    </script>
+</#if>
+</body>
+</html>
